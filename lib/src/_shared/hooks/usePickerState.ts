@@ -30,7 +30,7 @@ function useDateValues(props: BasePickerProps, options: StateHookOptions) {
 
 const roundDateToNearest5Minutes = (date: any) => {
   var coeff = 1000 * 60 * 5;
-  return new Date(Math.round(date.getTime() / coeff) * coeff);
+  return new Date(Math.ceil(date.getTime() / coeff) * coeff);
 };
 
 export function usePickerState(props: BasePickerProps, options: StateHookOptions) {
