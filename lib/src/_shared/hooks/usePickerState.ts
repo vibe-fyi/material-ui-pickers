@@ -28,6 +28,11 @@ function useDateValues(props: BasePickerProps, options: StateHookOptions) {
   return { date, format };
 }
 
+const roundDateToNearest5Minutes = (date: any) => {
+  var coeff = 1000 * 60 * 5;
+  return new Date(Math.round(date.getTime() / coeff) * coeff);
+};
+
 export function usePickerState(props: BasePickerProps, options: StateHookOptions) {
   const { autoOk, disabled, readOnly, onAccept, onChange, onError, value, variant } = props;
 
@@ -61,7 +66,7 @@ export function usePickerState(props: BasePickerProps, options: StateHookOptions
       open: isOpen,
       onClear: () => acceptDate(null),
       onAccept: () => acceptDate(pickerDate),
-      onSetToday: () => setPickerDate(utils.date()),
+      onSetToday: () => setPickerDate(roundDateToNearest5Minutes(utils.date())),
       onDismiss: () => {
         setIsOpen(false);
       },
